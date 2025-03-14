@@ -1,37 +1,30 @@
-# Real-time Log Processing and Alerting System
+# Use Case: Real-Time Stock Market Data Processing
+## Architecture Overview
 
-### Overview:
+1. Data Source: real-time stock price data
+2. Kafka Cluster: Streams stock data to a Kafka topic.
+3. Consumer (PySpark Structured Streaming): Reads data from Kafka and processes stock trends.
+4. Data Storage: Stores results in AWS S3 (raw data) and Redshift (processed data).
+5. Visualization: Uses QuickSight or Grafana to visualize stock trends.
 
-    Build a real-time log processing pipeline that ingests system/application logs, processes them using Kafka, and generates alerts for anomalies.
-
-### Tech Stack:
-
-    Kafka (for message streaming)
-    Python (to produce and consume messages using confluent-kafka or kafka-python)
-    PySpark / Flink (for stream processing)
-    PostgreSQL / Elasticsearch (for storing processed logs)
-    Grafana / Kibana (for visualization & monitoring)
-    AWS S3 / Kafka Connect (optional: for long-term storage)
-
-### Project Steps:
-
-1. Log Generator (Producer)
-    Create a Python script that generates fake system logs (INFO, WARNING, ERROR)
-    Push logs to a Kafka topic (logs_raw)
-2. Kafka Consumer & Stream Processing
-    Consume logs from logs_raw
-    Parse and categorize log messages
-    Filter out ERROR or WARNING messages to a new Kafka topic (logs_alerts)
-3. Store & Analyze Logs
-    Save structured logs in PostgreSQL or Elasticsearch
-    Use Grafana/Kibana to visualize trends
-4. Real-time Alerting System
-    Set up a Kafka consumer that listens to logs_alerts
-    Trigger an alert (email, Slack, or webhook) when error frequency exceeds a threshold
-### Bonus Enhancements:
-    Implement Kafka Connect to store logs in AWS S3
-    Use Apache Flink for advanced stream processing
-    Deploy the solution with Docker & Kubernetes
+## Step-by-Step Implementation
+1. Setup Kafka Cluster
+    Install and configure Kafka on your local machine.
+    Create a Kafka topic (stock_prices).
+2. Pull Real-Time Data Producer
+    Write a Python script to pull and send fake stock price data to Kafka.
+    Use kafka-python or confluent-kafka to push messages.
+3. Stream Processing with PySpark
+    Use Structured Streaming to consume Kafka messages.
+    Perform real-time transformations (e.g., moving average, anomaly detection).
+    Store raw data in S3 and processed insights in postgresql.
+4. Deploy to AWS
+    Use Amazon MSK (Managed Kafka) to scale.
+    Store streaming results in S3 (raw data) and Redshift (aggregated trends).
+    Automate using AWS Lambda or Glue Jobs.
+5. Visualize in Grafana / QuickSight
+    Connect Redshift to QuickSight or use Grafana for real-time dashboards.
+    Show stock price trends, moving averages, and volume analysis.
 
 
 
