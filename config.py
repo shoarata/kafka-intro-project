@@ -1,0 +1,1 @@
+btc_price_topic_name = "btc_price"

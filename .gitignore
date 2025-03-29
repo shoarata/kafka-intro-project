@@ -2,3 +2,4 @@ poetry.lock
 .idea/*
 secrets/*
 **/__pycache__/*
+.DS_Store
